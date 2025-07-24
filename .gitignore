@@ -21,3 +21,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+.vscode
+.vs
+*.sln
+build
+bin
+obj
