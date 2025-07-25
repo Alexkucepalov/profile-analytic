@@ -1,0 +1,65 @@
+{
+    "id": "36f7024b-ed25-457f-b86b-86e75a002e09",
+    "model": "sonar-pro",
+    "created": 1753401575,
+    "usage": {
+        "prompt_tokens": 130,
+        "completion_tokens": 206,
+        "total_tokens": 336,
+        "search_context_size": "low"
+    },
+    "citations": [
+        "https://t.me/s/sibgencoonline?before=1840",
+        "http://hist.isu.ru/ru/science/docs/2024/XVI_Baikal_soc_hum.pdf",
+        "https://t.me/s/sibgencoonline?before=1922",
+        "https://www.rusprofile.ru/id/4115412",
+        "https://sibgenco.ru/tenders/postavka-modulnykh-lesov-klinovye-s-kompleksom-inzhiniringovykh-uslug-v-2024-godu-dlya-nuzhd-barnaul/"
+    ],
+    "search_results": [
+        {
+            "title": "СГК online",
+            "url": "https://t.me/s/sibgencoonline?before=1840",
+            "date": "2025-02-07",
+            "last_updated": "2025-02-17"
+        },
+        {
+            "title": "ШЕСТНАДЦАТЫЕ БАЙКАЛЬСКИЕ - Исторический факультет",
+            "url": "http://hist.isu.ru/ru/science/docs/2024/XVI_Baikal_soc_hum.pdf",
+            "date": null,
+            "last_updated": "2025-07-18"
+        },
+        {
+            "title": "СГК online",
+            "url": "https://t.me/s/sibgencoonline?before=1922",
+            "date": "2025-03-17",
+            "last_updated": "2025-07-23"
+        },
+        {
+            "title": "АО \"Сибэр\" Красноярск (ИНН 2462028886) адрес и ...",
+            "url": "https://www.rusprofile.ru/id/4115412",
+            "date": "2003-12-23",
+            "last_updated": "2025-01-15"
+        },
+        {
+            "title": "Информация о закупке № 7007-2024-СибЭР",
+            "url": "https://sibgenco.ru/tenders/postavka-modulnykh-lesov-klinovye-s-kompleksom-inzhiniringovykh-uslug-v-2024-godu-dlya-nuzhd-barnaul/",
+            "date": null,
+            "last_updated": null
+        }
+    ],
+    "object": "chat.completion",
+    "choices": [
+        {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+                "role": "assistant",
+                "content": "Крупные инвестиции направлены на модернизацию ТЭЦ и ГРЭС в Кузбассе более 17 млрд руб. по федеральной программе ДПМ[3].  \nРеализуется обновление оборудования на Новосибирской ТЭЦ-3, включая замену турбины до конца 2025 года[3].  \nЗавершена масштабная реконструкция пятого энергоблока Приморской ГРЭС с успешными испытаниями[1].  \nСовокупный объем инвестиций участников премии сезона 2024-2025 превысил 103 млрд руб., установлен новый рекорд мощности свыше 1200 МВт[1].  \nСтартовал прием заявок на конкурс «Гранты.ФМ 2025» для поддержки инфраструктурных и социальных проектов[1]."
+            },
+            "delta": {
+                "role": "assistant",
+                "content": ""
+            }
+        }
+    ]
+}

@@ -1,0 +1,65 @@
+{
+    "id": "780df6d4-9a20-4239-a762-db533f51986e",
+    "model": "sonar-pro",
+    "created": 1753401840,
+    "usage": {
+        "prompt_tokens": 148,
+        "completion_tokens": 222,
+        "total_tokens": 370,
+        "search_context_size": "low"
+    },
+    "citations": [
+        "https://finance.rambler.ru/business/46568044-tmk-i-gruppa-sinara-podveli-itogi-uchastiya-v-pmef-2021-novye-vyzovy-ozhidaniya-i-vozmozhnosti/",
+        "https://www.hse.ru/data/2022/08/30/1695869743/%D0%91%D0%9E%D0%92%2044-45%202022.pdf",
+        "https://www.akm.ru/news/rosneft_i_tmk_dogovorilis_o_postavke_metalloproduktsii_dlya_proekta_vostok_oyl/",
+        "https://newpressa.pressa.ru/media/private/ekspert/2020/50-2020/raw_issue/ekspert-2020-50-2020.pdf",
+        "https://www.rosneft.ru/press/releases/item/206517/"
+    ],
+    "search_results": [
+        {
+            "title": "ТМК и Группа Синара подвели итоги участия в ПМЭФ-2021",
+            "url": "https://finance.rambler.ru/business/46568044-tmk-i-gruppa-sinara-podveli-itogi-uchastiya-v-pmef-2021-novye-vyzovy-ozhidaniya-i-vozmozhnosti/",
+            "date": "2021-06-05",
+            "last_updated": "2025-01-16"
+        },
+        {
+            "title": "[PDF] 44-45 2022 - Высшая школа экономики",
+            "url": "https://www.hse.ru/data/2022/08/30/1695869743/%D0%91%D0%9E%D0%92%2044-45%202022.pdf",
+            "date": "2022-08-30",
+            "last_updated": "2025-01-21"
+        },
+        {
+            "title": "Роснефть и ТМК договорились о поставке ...",
+            "url": "https://www.akm.ru/news/rosneft_i_tmk_dogovorilis_o_postavke_metalloproduktsii_dlya_proekta_vostok_oyl/",
+            "date": "2021-06-04",
+            "last_updated": "2025-03-24"
+        },
+        {
+            "title": "[PDF] пролетариата - Pressa.ru",
+            "url": "https://newpressa.pressa.ru/media/private/ekspert/2020/50-2020/raw_issue/ekspert-2020-50-2020.pdf",
+            "date": null,
+            "last_updated": null
+        },
+        {
+            "title": "и ТМК договорились о поставке металлопродукции для ...",
+            "url": "https://www.rosneft.ru/press/releases/item/206517/",
+            "date": "2021-06-04",
+            "last_updated": "2025-05-13"
+        }
+    ],
+    "object": "chat.completion",
+    "choices": [
+        {
+            "index": 0,
+            "finish_reason": "stop",
+            "message": {
+                "role": "assistant",
+                "content": "Проект «Восток Ойл» — крупнейший инфраструктурный проект с застройщиком «Синара Девелопмент», требующий поставок металлопродукции, включая трубы, металлоконструкции, резервуары и металлоемкие элементы[1][3][5].\n\nСтроительство объектов энергетики, морских и речных терминалов, а также промысловых городков, где необходимы крупные объемы металлоконструкций[3].\n\nБурение крупного фонда скважин с применением трубной продукции[3].\n\nОбновление транспортной и промышленной инфраструктуры для логистики и хранения нефти, требующее использования продукции ТМК[1][3].\n\nДоговоренности о долгосрочных поставках металлопродукции ТМК для всех этапов реализации проекта «Восток Ойл»[1][3][5]."
+            },
+            "delta": {
+                "role": "assistant",
+                "content": ""
+            }
+        }
+    ]
+}
