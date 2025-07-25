@@ -51,8 +51,14 @@ profile-analytics/
 │   └── tsconfig.json          # Конфигурация TypeScript
 ├── backend/
 │   │
-│   └── ...
-│   
+│   └── Horizont2
+|        |---Program.cs        # Файл для запуска проекта
+|        |---Startup.cs        # Конфигурация при запуске
+|        |---appSetting.json   # Основные настройки конфигурации
+|        |---Connection/       # Объекты для подключения к БД и маппинга через EntityFramework 
+│        |---Models/           # Классы для связи с БД, основные сущности системы 
+|        |---Services/         # Сервис для работы с данными
+|        |---Controllers       # Контроллер для предоставления API front-end 
 │
 └── README.md              # Документация (вы читаете её)
 ```
