@@ -30,6 +30,21 @@
 
 #TODO описать предлагаемое решение
 
+## API backend
+      ///
+      List<JsonResult> GetContrpartnerByName(String name)
+      List<JsonResult> GetContrpartnerByInn(long inn)
+      List<JsonResult> GetContrpartnerByDivision(String division)
+      List<JsonResult> GetContrpartnerByWarehouse(String warehouse)
+      List<JsonResult> GetAssortments()
+      List<JsonResult> GetSaleDocumentsByContrpartner(long id)
+      JsonResult GetTnsByContrpartner(long id)
+      List<JsonResult> GetTnsByMonths(long id)
+      List<JsonResult> GetTnsBySuppliers(long id)
+      List<JsonResult> GetAssortmentApriori(long id)
+      List<JsonResult> GetFrequentlyAssortment()
+      List<JsonResult> GetFrequentlyAssortmentByContrpartner(long id)
+
 ## Структура проекта
 
 #TODO описать остальное
