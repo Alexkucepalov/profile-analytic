@@ -31,30 +31,41 @@
 #TOD0 описание идеи
 
 ## API backend
-  //Получение списка контрагентов по имени. Учитывается вхождение без учета регистра. 
-  List<JsonResult> GetContrpartnerByName(String name)
-  //Получение списка контрагентов по ИНН. учитывается вхождение.
-      List<JsonResult> GetContrpartnerByInn(long inn)
+//Получение списка контрагентов по имени. Учитывается вхождение без учета регистра. 
+List<JsonResult> GetContrpartnerByName(String name)
+  
+//Получение списка контрагентов по ИНН. учитывается вхождение.
+List<JsonResult> GetContrpartnerByInn(long inn)
+      
 //Получение списка контрагентов по региону. Учитывается вхождение.
-      List<JsonResult> GetContrpartnerByDivision(String division)
-      //Получение списка контрагентов по складу. Учитывается вхождение строки.
-      List<JsonResult> GetContrpartnerByWarehouse(String warehouse)
-      //Получение списка сортамента. 
-      List<JsonResult> GetAssortments()
-      //Получение документов продаж по контрагенту.
-      List<JsonResult> GetSaleDocumentsByContrpartner(long id)
-      //Получение общего веса всех покупок по конкретному контрагенту 
-      JsonResult GetTnsByContrpartner(long id)
+List<JsonResult> GetContrpartnerByDivision(String division)
+      
+ //Получение списка контрагентов по складу. Учитывается вхождение строки.
+List<JsonResult> GetContrpartnerByWarehouse(String warehouse)
+      
+//Получение списка сортамента. 
+List<JsonResult> GetAssortments()
+     
+//Получение документов продаж по контрагенту.
+List<JsonResult> GetSaleDocumentsByContrpartner(long id)
+      
+//Получение общего веса всех покупок по конкретному контрагенту 
+JsonResult GetTnsByContrpartner(long id)
+
 //Получение объема 
 List<JsonResult> GetTnsByMonths(long id)
+
 //Получение обьема всех покупок конкретного контрагента в аналитике по месяцам 
-      List<JsonResult> GetTnsBySuppliers(long id)
-    // Получение рекомендаций для контрагента на основе алгоритма априори
-      List<JsonResult> GetAssortmentApriori(long id)
-      //Получение часто покупаемых сортаментов
-      List<JsonResult> GetFrequentlyAssortment()
-     //Получение часто покупаемых сортаментов по характеристикам конкретного контрагента (регион)
-      List<JsonResult> GetFrequentlyAssortmentByContrpartner(long id)
+List<JsonResult> GetTnsBySuppliers(long id)
+
+// Получение рекомендаций для контрагента на основе алгоритма априори
+List<JsonResult> GetAssortmentApriori(long id)
+      
+//Получение часто покупаемых сортаментов
+List<JsonResult> GetFrequentlyAssortment()
+     
+//Получение часто покупаемых сортаментов по характеристикам конкретного контрагента (регион)
+List<JsonResult> GetFrequentlyAssortmentByContrpartner(long id)
 
 ## Структура проекта
 
