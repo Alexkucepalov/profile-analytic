@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+    volumes:
+      #- ./pgdata:/var/lib/postgresql/data
+      - ./etc/backup.sql:/docker-entrypoint-initdb.d/backup.sql
+    ports:
+      - "5432:5432"
+
+  backend:
+    depends_on: 
+      - db
+    build:
+      context: backend/
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      ASPNETCORE_URLS: "http://+:5000/"
+      ConnectionStrings__Horizons: "Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=password"
+      ASPNETCORE_ENVIRONMENT: "Development"
+    ports: 
+      - "5000:5001"
+    image: profileanalytics-backend
+
