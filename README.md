@@ -24,48 +24,11 @@
 **Ожидаемый результат:**
 - MVP системы рекомендаций, интегрированной в аналитическую платформу.
 
----
+──
 
 ## Описание идеи
 
 #TOD0 описание идеи
-
-## API backend
-//Получение списка контрагентов по имени. Учитывается вхождение без учета регистра. 
-List<JsonResult> GetContrpartnerByName(String name)
-  
-//Получение списка контрагентов по ИНН. учитывается вхождение.
-List<JsonResult> GetContrpartnerByInn(long inn)
-      
-//Получение списка контрагентов по региону. Учитывается вхождение.
-List<JsonResult> GetContrpartnerByDivision(String division)
-      
- //Получение списка контрагентов по складу. Учитывается вхождение строки.
-List<JsonResult> GetContrpartnerByWarehouse(String warehouse)
-      
-//Получение списка сортамента. 
-List<JsonResult> GetAssortments()
-     
-//Получение документов продаж по контрагенту.
-List<JsonResult> GetSaleDocumentsByContrpartner(long id)
-      
-//Получение общего веса всех покупок по конкретному контрагенту 
-JsonResult GetTnsByContrpartner(long id)
-
-//Получение объема 
-List<JsonResult> GetTnsByMonths(long id)
-
-//Получение обьема всех покупок конкретного контрагента в аналитике по месяцам 
-List<JsonResult> GetTnsBySuppliers(long id)
-
-// Получение рекомендаций для контрагента на основе алгоритма априори
-List<JsonResult> GetAssortmentApriori(long id)
-      
-//Получение часто покупаемых сортаментов
-List<JsonResult> GetFrequentlyAssortment()
-     
-//Получение часто покупаемых сортаментов по характеристикам конкретного контрагента (регион)
-List<JsonResult> GetFrequentlyAssortmentByContrpartner(long id)
 
 ## Структура проекта
 
@@ -88,29 +51,29 @@ profile-analytics/
 │   └── tsconfig.json          # Конфигурация TypeScript
 ├── backend/
 │   │
-│   └── Horizont2
-|        |---Program.cs        # Файл для запуска проекта
-|        |---Startup.cs        # Конфигурация при запуске
-|        |---appSetting.json   # Основные настройки конфигурации
-|        |---Connection/       # Объекты для подключения к БД и маппинга через EntityFramework 
-│        |---Models/           # Классы для связи с БД, основные сущности системы 
-|        |---Services/         # Сервис для работы с данными
-|        |---Controllers       # Контроллер для предоставления API front-end 
-│
+│   ├── Program.cs        # Файл для запуска проекта
+│   ├── Startup.cs        # Конфигурация при запуске
+│   ├── appSetting.json   # Основные настройки конфигурации
+│   ├── Connection/       # Объекты для подключения к БД и маппинга через EntityFramework 
+│   ├── Models/           # Классы для связи с БД, основные сущности системы 
+│   ├── Services/         # Сервис для работы с данными
+│   └── Controllers/       # Контроллер для предоставления API front-end 
+├── doc/             # Документация
+├── etc/             # Прочее
 └── README.md              # Документация (вы читаете её)
 ```
 
----
+──
 
 ## Контакты
 
-Александр Куцепалов (GH:@Alexkucepalov, TG: @alexkucep) - Frontend, дизайн сайта и презентации.
-Аршина Альфия (GH, TG: @sindzirarenai) - Backend, работа с данными.
-Александр Воробьев (GH: kadooqq, TG: kadoqq) - DevOps, идеи, тимлидинг.
-Леонид Фролов (TG: @greedyleo) - Аналитика, презентация.
+Александр Куцепалов (GH:@Alexkucepalov, TG: @alexkucep) - Frontend, дизайн сайта и презентации.\
+Аршина Альфия (GH, TG: @sindzirarenai) - Backend, работа с данными.\
+Александр Воробьев (GH: kadooqq, TG: kadoqq) - DevOps, идеи, тимлидинг.\
+Леонид Фролов (TG: @greedyleo) - Аналитика, презентация.\
 Алим Махмудов (TG: @rey_mua) - Помощь.
 
----
+──
 
 ## Примечания
 
@@ -118,12 +81,29 @@ profile-analytics/
 - Все изображения и логотипы используются только в рамках данного проекта.
 - Проект поддерживает современные браузеры.
 
----
+──
+
+## Сборка
+
+### backend
+Сборка backend приложения, развертка БД осуществляется в Docker-контейнерах с использованием docker.
+Также, вы можете попробовать использовать docker-compose:
+
+```bash
+# if you doesn't have docker-compose, run:
+# sudo apt install docker-compose
+docker-compose up --build -d
+```
+Но по крайней мере на macosx, контейнеры собираются, поднимаются и крутятся, но API не отвечает и не подключается к БД. Возможно, проблемы с сетью :C.
+
+### frontend
+Сборка frontend приложения осуществляется вручную, описана в frontend/README.md
+
+──
 
 ## TODO
 
 - Описать предлагаемое решение.
 - Добавить сборку Docker-образа для frontend приложения.
-- Добавить сборку и поднятие контейнера с БД (с предустановленными данными, если можно публиковать).
-- Добавить сборку / поднятие контейнеров при помощи docker-compose.
+- Отладить поднятие контейнеров при помощи docker-compose.
 - CI/CD в GitHub actions?
