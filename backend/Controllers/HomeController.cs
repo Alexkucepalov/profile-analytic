@@ -27,6 +27,11 @@ namespace Horizons.Controllers
             Service = service;
         }
 
+ /// <summary>
+        /// Получение списка контрагентов по имени. Учитывается вхождение без учета регистра.
+        /// </summary>
+        /// <param name="name">вводимое имя</param>
+        /// <returns>Список подходящих по введенному имени контрагентов</returns>
         [HttpGet("GetContrpartnerByName")]
         public List<JsonResult> GetContrpartnerByName(String name)
         {
@@ -35,7 +40,11 @@ namespace Horizons.Controllers
                 .ConvertAll(x => new JsonResult(x));
         }
 
-
+        /// <summary>
+        /// Получение списка контрагентов по ИНН. учитывается вхождение.
+        /// </summary>
+        /// <param name="inn">инн введенный</param>
+        /// <returns>Список подходящих по введенному инн контрагентов</returns>
         [HttpGet("GetContrpartnerByInn")]
         public List<JsonResult> GetContrpartnerByInn(long inn)
         {
@@ -43,7 +52,12 @@ namespace Horizons.Controllers
             return Context.Contrpartners.Where(x => x.ContrpartnerInn.ToString().ToLower().Contains(inn.ToString().ToLower())).ToList()
                 .ConvertAll(x => new JsonResult(x));
         }
-
+        
+        /// <summary>
+        /// Получение списка контрагентов по региону. 
+        /// </summary>
+        /// <param name="division">регион</param>
+        /// <returns>Список подходящих по введенному региону контрагентов</returns>
         [HttpGet("GetContrpartnerByDivision")]
         public List<JsonResult> GetContrpartnerByDivision(String division)
         {
@@ -52,6 +66,11 @@ namespace Horizons.Controllers
                 .ConvertAll(x => new JsonResult(x));
         }
 
+        /// <summary>
+        /// Получение списка контрагентов по складу. Учитывается вхождение строки.
+        /// </summary>
+        /// <param name="warehouse">склад</param>
+        /// <returns>Список подходящих по введенному складу контрагентов</returns>
         [HttpGet("GetContrpartnerByWarehouse")]
         public List<JsonResult> GetContrpartnerByWarehouse(String warehouse)
         {
@@ -65,14 +84,25 @@ namespace Horizons.Controllers
                 .ConvertAll(x => new JsonResult(x));
         }
 
+        /// <summary>
+        /// Получение списка сортамента.
+        /// </summary>
+        /// <returns>Сортамент</returns>
         [HttpGet("GetAssortments")]
-         public List<JsonResult> GetAssortments()
+        public List<JsonResult> GetAssortments()
          {
              _logger.LogInformation("GET GetAssortments");
-            return Context.Assortments.Take(500).ToList().ConvertAll(x => new JsonResult(x));
+            return Context.Assortments
+                .Take(500)//искусственное ограничение для демо
+                .ToList().ConvertAll(x => new JsonResult(x));
          }
 
-         [HttpGet("GetSaleDocumentsByContrpartner")]
+        /// <summary>
+        /// Получение документов продаж по контрагенту.
+        /// </summary>
+        /// <param name="id">ИД контрагента</param>
+        /// <returns>список документов-продаж с сортаментом по каждой позиции</returns>
+        [HttpGet("GetSaleDocumentsByContrpartner")]
          public List<JsonResult> GetSaleDocumentsByContrpartner(long id)
          {
             _logger.LogInformation("GET GetSaleDocumentsByContrpartner, args=" );
@@ -91,6 +121,11 @@ namespace Horizons.Controllers
              return assortment.ConvertAll(u => new JsonResult(u));
          }
 
+        /// <summary>
+        /// Объем продаж по контрагенту
+        /// </summary>
+        /// <param name="id">ИД контрагента</param>
+        /// <returns>Объем продаж в тоннах</returns>
         [HttpGet("GetTnsByContrpartner")]
          public JsonResult GetTnsByContrpartner(long id)
          {
@@ -100,7 +135,12 @@ namespace Horizons.Controllers
                  .Select(y => y.Tns).Sum());
          }
 
-         [HttpGet("GetTnsByMonths")]
+        /// <summary>
+        /// Объем продаж в разрезе месяцев документа-продаж
+        /// </summary>
+        /// <param name="id">ИД контрагента</param>
+        /// <returns>Объем продаж в тоннах с группировкой по месяцам</returns>
+        [HttpGet("GetTnsByMonths")]
          public List<JsonResult> GetTnsByMonths(long id)
          {
              _logger.LogInformation("GET GetTnsByMonths, args=" + id);
@@ -116,7 +156,12 @@ namespace Horizons.Controllers
              return monthTns.ConvertAll(x => new JsonResult(x));
          }
 
-         [HttpGet("GetTnsBySuppliers")]
+        /// <summary>
+        /// Объем продаж в разрезе поставщиков из документа-продаж
+        /// </summary>
+        /// <param name="id">ИД контрагента</param>
+        /// <returns>Объем продаж в тоннах с группировкой по поставщикам</returns>
+        [HttpGet("GetTnsBySuppliers")]
          public List<JsonResult> GetTnsBySuppliers(long id)
          {
              _logger.LogInformation("GET GetTnsBySuppliers, args=" + id);
@@ -132,21 +177,35 @@ namespace Horizons.Controllers
             return supplierTns.ConvertAll(x => new JsonResult(x));
         }
 
-         [HttpGet("GetAssortmentApriori")]
+        /// <summary>
+        /// Получение рекомендаций для контрагента на основе алгоритма априори
+        /// </summary>
+        /// <param name="id">ИД контрагента</param>
+        /// <returns>Список сортамента</returns>
+        [HttpGet("GetAssortmentApriori")]
          public List<JsonResult> GetAssortmentApriori(long id)
          {
              _logger.LogInformation("GET GetAssortmentApriori, args=" + id);
-            return Service.GetAssortmentApriori(id,  Context).ConvertAll(x=>new JsonResult(x));
+            return Service.GetAssortmentApriori(id,  Context, 10, 2).ConvertAll(x=>new JsonResult(x));
          }
 
-         [HttpGet("GetFrequentlyAssortment")]
+        /// <summary>
+        /// Получение часто покупаемых сортаментов
+        /// </summary>
+        /// <returns>Список сортамента</returns>
+        [HttpGet("GetFrequentlyAssortment")]
          public List<JsonResult> GetFrequentlyAssortment()
          {
              _logger.LogInformation("GET GetFrequentlyAssortment" );
             return Service.GetFrequentlyAssortment( Context).ConvertAll(x => new JsonResult(x));
          }
 
-         [HttpGet("GetFrequentlyAssortmentByContrpartner")]
+        /// <summary>
+        /// Получение часто покупаемых сортаментов по характеристикам конкретного контрагента (регион)
+        /// </summary>
+        /// <param name="id">ИД контрагента</param>
+        /// <returns>Список сортамента<</returns>
+        [HttpGet("GetFrequentlyAssortmentByContrpartner")]
          public List<JsonResult> GetFrequentlyAssortmentByContrpartner(long id)
          {
              _logger.LogInformation("GET GetFrequentlyAssortmentByContrpartner, args=" + id);
