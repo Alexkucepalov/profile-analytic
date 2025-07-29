@@ -68,40 +68,38 @@ namespace Horizons.Services
                 .ToList();
         }
 
-        public List<Assortment> GetAssortmentApriori(long id, ApplicationContext context)
+        public List<Assortment> GetAssortmentApriori(long id, ApplicationContext context, long levelSet, long levelSupport)
         {
-            var levelCalculate = 10;
-
             //продажи контрагента
             var contrpartnerDocIds =
                 context.SaleDocuments.Where(x => x.ContrpartnerId == id).Select(x => x.Id).ToList();
 
             if (!contrpartnerDocIds.Any()) return new List<Assortment>();
-            
+
             //вычисляем популярный набор у контрагента (не более ограничения)
             var assortmentFrequentlyIds = GetSetAssortmentsFromDocuments(contrpartnerDocIds, context)
-                .Where(x => x.Count <= levelCalculate).ToList()
+                .Where(x => x.Count <= levelSet).ToList()
                 .GroupBy(x => x)
-                .Select(z => new {Assortment = z.Key, Cnt = z.Count()})
+                .Select(z => new { Assortment = z.Key, Cnt = z.Count() })
                 .OrderByDescending(x => x.Cnt).FirstOrDefault()?.Assortment;
 
-           if (assortmentFrequentlyIds == null) return new List<Assortment>();
+            if (assortmentFrequentlyIds == null) return new List<Assortment>();
 
-           //Ищем подходящие документы других контрагентов с подходящим сортаментом
-           var saleDocId = context.Sales.Where(x =>
-                   !contrpartnerDocIds.Contains(x.SaleDocumentId.GetValueOrDefault())
-                   && assortmentFrequentlyIds.Contains(x.AssortmentId.GetValueOrDefault()))
-               .Select(x => x.SaleDocumentId.GetValueOrDefault()).ToList();
+            //Ищем подходящие документы других контрагентов с подходящим сортаментом
+            var saleDocId = context.Sales.Where(x =>
+                    !contrpartnerDocIds.Contains(x.SaleDocumentId.GetValueOrDefault())
+                    && assortmentFrequentlyIds.Contains(x.AssortmentId.GetValueOrDefault()))
+                .Select(x => x.SaleDocumentId.GetValueOrDefault()).ToList();
 
-           //Достаем наборы сортамента, содержащие набор контрагента
-           var assortmentForSupport = GetSetAssortmentsFromDocuments(saleDocId, context)
-               .Where(x => x.Count(t => assortmentFrequentlyIds.Contains(t)) == assortmentFrequentlyIds.Count);
+            //Достаем наборы сортамента, содержащие набор контрагента
+            var assortmentForSupport = GetSetAssortmentsFromDocuments(saleDocId, context)
+                .Where(x => x.Count(t => assortmentFrequentlyIds.Contains(t)) == assortmentFrequentlyIds.Count);
 
-           //Берем уникальные сортаменты из наборов
-           var uniqueAssortments = assortmentForSupport.SelectMany(y => y).Distinct().ToList();
-           uniqueAssortments.RemoveAll(x => assortmentFrequentlyIds.Contains(x));
+            //Берем уникальные сортаменты из наборов
+            var uniqueAssortments = assortmentForSupport.SelectMany(y => y).Distinct().ToList();
+            uniqueAssortments.RemoveAll(x => assortmentFrequentlyIds.Contains(x));
 
-           var supportSet = new Dictionary<Assortment, long>();
+            var supportSet = new Dictionary<Assortment, long>();
 
             foreach (var assortment in uniqueAssortments)
             {
@@ -109,14 +107,14 @@ namespace Horizons.Services
                     assortmentForSupport.Count(j => j.Contains(assortment)));
             }
 
-           var result = supportSet.OrderByDescending(o => o.Value)
-               .Where(o => o.Value > 2)
-               .Select(l => l.Key).Take(10)
-               .ToList();
+            var result = supportSet.OrderByDescending(o => o.Value)
+                .Where(o => o.Value > levelSupport)
+                .Select(l => l.Key).Take(10)
+                .ToList();
 
-           result.ForEach(x=>x.Sales.Clear());
+            result.ForEach(x => x.Sales.Clear());
 
-           return result;
+            return result;
         }
 
     }
